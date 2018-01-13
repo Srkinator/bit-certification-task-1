@@ -24,16 +24,17 @@ nav {
     float: right;
     margin-top: 2.5%;
     border-radius: 20%;
-    border: 2px solid #c9c5c5; }
+    border: 2px solid #c9c5c5;
+    width: 30%; }
 
 .candidate-container {
   width: 100%;
   margin: 0 0;
-  display: inline-block; }
+  text-align: center; }
 
 .candidate-card {
-  width: fit-content;
-  display: inline-block;
-  margin: 5%; }
+  border: 1px solid #c9c5c5;
+  text-align: center;
+  margin-top: 2%; }
 
 /*# sourceMappingURL=main.css.map */
