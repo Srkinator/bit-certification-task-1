@@ -69,12 +69,20 @@ searchHandler = () => {
 
 document.getElementById("search").addEventListener("keyup", searchHandler);
 
-redirectHandler = (event) => {
+redirectCandidate = (event) => {
     if (event.target.className == "redirect" || event.target.className == "candidate-card col-sm-12 col-md-6 col-lg-4") {
         var datafinal = event.target.getAttribute("data");
         localStorage.setItem("candidateID", datafinal);
-        location.assign("candidate.html");
+        location.assign("candidate.html"); 
     }
 }
 
-document.addEventListener("click", redirectHandler);
+document.addEventListener("click", redirectCandidate);
+
+var homeButton = document.getElementsByClassName("home")[0];
+
+homeButton.addEventListener("click", function() {
+    location.assign("index.html");
+});
+
+
