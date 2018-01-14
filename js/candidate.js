@@ -1,13 +1,13 @@
 var homeButton = document.getElementsByClassName("home")[0];
 var data = JSON.parse(localStorage.getItem("candidateID"));
-var reportsContainer =$(".reports")[0];
-var infoContainer =$(".candidate-info")[0];
+var reportsContainer = $(".reports")[0];
+var infoContainer = $(".candidate-info")[0];
 
-homeButton.addEventListener("click", function() {
+homeButton.addEventListener("click", function () {
     location.assign("index.html");
 });
 
-(loadInfo =() =>{
+(loadInfo = () => {
     console.log(infoContainer);
     var imgDiv = $("<div>");
     var infoDiv1 = $("<div>");
@@ -21,10 +21,10 @@ homeButton.addEventListener("click", function() {
     var email = $("<p>");
     var dateOfBirth = $("<p>");
     var education = $("<p>");
-    
+
     $(image).attr({
         "src": data.avatar,
-        "class" : "candidate-image",
+        "class": "candidate-image",
         "style": "width: 80%"
     });
 
@@ -40,27 +40,27 @@ homeButton.addEventListener("click", function() {
         "class": "col-lg-4"
     });
 
-    $(name).text("Name:");    
-    $(email).text("Email:");    
-    $(dateOfBirth).text("Date of birth: :");    
-    $(education).text("Education:");    
+    $(name).text("Name:");
+    $(email).text("Email:");
+    $(dateOfBirth).text("Date of birth: :");
+    $(education).text("Education:");
 
     $(nameData).text(data.name);
     $(emailData).text(data.email);
     $(dateOfBirthData).text(data.birthday);
     $(educationData).text(data.education);
-    
+
     $(infoDiv1).append($(name));
     $(infoDiv1).append($(nameData));
     $(infoDiv1).append($(email));
     $(infoDiv1).append($(emailData));
-    
+
     $(infoDiv2).append($(dateOfBirth));
     $(infoDiv2).append($(dateOfBirthData));
     $(infoDiv2).append($(education));
     $(infoDiv2).append($(educationData));
 
-    
+
     $(imgDiv).append(image[0]);
     $(infoContainer).append(imgDiv);
     $(infoContainer).append(infoDiv1);
@@ -68,6 +68,18 @@ homeButton.addEventListener("click", function() {
 
 })();
 
-(loadReports =() =>{
+let request = $.ajax({
+    url: "http://localhost:3333/api/reports",
+    method: "GET",
+});
 
-})()
+
+(loadReports = () => {
+    request.done(result => {
+        result.forEach((report, i) => {
+            if(report.candidateId == data.id){
+                console.log(report);
+            }
+        });
+    });
+})();

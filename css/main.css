@@ -37,4 +37,11 @@ nav {
   text-align: center;
   margin-top: 2%; }
 
+.reports-header {
+  margin-top: 5%; }
+
+table {
+  width: 100%;
+  border: 1px grey solid; }
+
 /*# sourceMappingURL=main.css.map */
