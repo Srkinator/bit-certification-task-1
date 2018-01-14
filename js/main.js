@@ -1,54 +1,80 @@
+var candidatePlaceholder = "http://style.anu.edu.au/_anu/4/images/placeholders/person.png";
+
 (loadCandidates = () => {
     fetch("http://localhost:3333/api/candidates")
-        .then(result => result.json())
-        .then(result => {
-            result.forEach((candidate, i) => {
-                var cardContainer = document.createElement("div");
-                var avatar = document.createElement("img");
-                var email = document.createElement("p");
-                var name = document.createElement("h4");
+    .then(result => result.json())
+    .then(result => {
+        result.forEach((candidate, i) => { 
+            var data =JSON.stringify(candidate);           
+            var cardContainer = document.createElement("div");
+            var avatar = document.createElement("img");
+            var email = document.createElement("p");
+            var name = document.createElement("h4");
 
-                name.textContent = candidate.name;
-                name.setAttribute("class", "candidate-name");
-                email.textContent = candidate.email;
+            email.setAttribute("class", "redirect");
+            email.setAttribute("data", data);
+            email.textContent = candidate.email;
+
+            cardContainer.setAttribute("id", candidate.id);
+            cardContainer.setAttribute("data", data);
+            cardContainer.setAttribute("class", "candidate-card col-sm-12 col-md-6 col-lg-4");
+
+            name.setAttribute("data", data);
+            name.setAttribute("class", "redirect candidate-name");
+            name.textContent = candidate.name;
+
+            avatar.setAttribute("data", data);
+            avatar.setAttribute("class", "redirect");
+            
+            
                 if (candidate.avatar.length > 1) {
                     avatar.setAttribute("src", candidate.avatar);
                 }
                 else {
-                    avatar.setAttribute("src", "http://via.placeholder.com/128x128");
+                    avatar.setAttribute("src", candidatePlaceholder);
+                    avatar.setAttribute("width", "128px");
                 }
-                cardContainer.setAttribute("class", "candidate-card col-sm-12 col-md-6 col-lg-4");
-
+                
                 var card = document.getElementsByClassName("candidate-container")[0];
                 cardContainer.appendChild(avatar);
                 cardContainer.appendChild(name);
                 cardContainer.appendChild(email);
                 card.appendChild(cardContainer);
 
-            })
-        })
+            });
+        });
 })();
 
 
-searchHandler =() =>{
-    var input, filter, i , name;
-    
+searchHandler = () => {
+    var input, filter, i, name;
+    console.log("aaa");
     input = document.getElementById("search");
     filter = input.value.toUpperCase();
-    name = document.getElementsByClassName("candidate-name");
+    name = document.getElementsByClassName("redirect candidate-name");
 
     for (i = 0; i < name.length; i++) {
-        
+
         if (name[i].innerHTML.toUpperCase().indexOf(filter) > -1) {
             name[i].style.display = "";
         } else {
-            // name[i].style.display = "none";
             document.getElementsByClassName("candidate-card")[i].style.display = "none";
         }
-        if(filter.length == 0){
+        if (filter.length == 0) {
             document.getElementsByClassName("candidate-card")[i].style.display = "";
         }
     }
 
 }
+
 document.getElementById("search").addEventListener("keyup", searchHandler);
+
+redirectHandler = (event) => {
+    if (event.target.className == "redirect" || event.target.className == "candidate-card col-sm-12 col-md-6 col-lg-4") {
+        var datafinal = event.target.getAttribute("data");
+        localStorage.setItem("candidateID", datafinal);
+        location.assign("candidate.html");
+    }
+}
+
+document.addEventListener("click", redirectHandler);
