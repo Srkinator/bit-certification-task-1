@@ -53,10 +53,26 @@ nav {
 
 .reports-header {
     margin-top: 5%;
+    margin-bottom: 2%;
 }
 
 table {
     width: 100%;
     border: 1px grey solid;
+    th {
+        border: 1px solid grey;
+        background-color: rgb(201, 197, 197);
+    }
+    tr{
+        border: 1px solid grey;
+    }
+    td{
+        border: 1px solid grey;
+    }
 }
+
+.modal-icon{
+    float: right;
+}
+
 

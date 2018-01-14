@@ -38,10 +38,21 @@ nav {
   margin-top: 2%; }
 
 .reports-header {
-  margin-top: 5%; }
+  margin-top: 5%;
+  margin-bottom: 2%; }
 
 table {
   width: 100%;
   border: 1px grey solid; }
+  table th {
+    border: 1px solid grey;
+    background-color: #c9c5c5; }
+  table tr {
+    border: 1px solid grey; }
+  table td {
+    border: 1px solid grey; }
+
+.modal-icon {
+  float: right; }
 
 /*# sourceMappingURL=main.css.map */

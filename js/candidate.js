@@ -2,6 +2,10 @@ var homeButton = document.getElementsByClassName("home")[0];
 var data = JSON.parse(localStorage.getItem("candidateID"));
 var reportsContainer = $(".reports")[0];
 var infoContainer = $(".candidate-info")[0];
+var table = $(".reports-table")[0];
+var candidatePlaceholder = "http://style.anu.edu.au/_anu/4/images/placeholders/person.png";
+var modalIcon = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTh4cOH2hjbNUv5gu7qoMOxW9lZBF-cXE28wGS6KqVkIdI-mEnD";
+
 
 homeButton.addEventListener("click", function () {
     location.assign("index.html");
@@ -22,11 +26,20 @@ homeButton.addEventListener("click", function () {
     var dateOfBirth = $("<p>");
     var education = $("<p>");
 
-    $(image).attr({
-        "src": data.avatar,
-        "class": "candidate-image",
-        "style": "width: 80%"
-    });
+    if (data.avatar.length > 1) {
+        $(image).attr({
+            "src": data.avatar,
+            "class": "candidate-image",
+            "style": "width: 80%"
+        });
+    }
+    else {
+        $(image).attr({
+            "src": candidatePlaceholder,
+            "class": "candidate-image",
+            "style": "width: 80%"
+        });
+    }
 
     $(imgDiv).attr({
         "class": "col-lg-4"
@@ -77,9 +90,41 @@ let request = $.ajax({
 (loadReports = () => {
     request.done(result => {
         result.forEach((report, i) => {
-            if(report.candidateId == data.id){
+            if (report.candidateId == data.id) {
                 console.log(report);
+                var tr = $("<tr>");
+                var company = $("<td>");
+                var interviewDate = $("<td>");
+                var status = $("<td>");
+                var icon = $("<img>");
+
+                $(icon).attr({
+                    "src": modalIcon,
+                    "class": "modal-icon",
+                    "style": "width: 10%",
+                    "reportData": JSON.stringify(report)
+                });
+
+                $(company).text(report.companyName);
+                $(interviewDate).text(new Date((report.interviewDate)).toDateString().slice(3));
+                $(status).text(report.status);
+
+                $(status).append($(icon));
+                $(tr).append($(company));
+                $(tr).append($(interviewDate));
+                $(tr).append($(status));
+
+                $(table).append(tr);
             }
         });
     });
 })();
+
+openModal = (event) => {
+    if (event.target.className == "modal-icon") {
+        var reportData = JSON.parse(event.target.getAttribute("reportData"));
+        console.log(reportData);
+    }
+}
+
+document.addEventListener("click", openModal);
