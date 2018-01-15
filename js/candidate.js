@@ -102,7 +102,8 @@ let request = $.ajax({
                     "src": modalIcon,
                     "class": "modal-icon",
                     "style": "width: 10%",
-                    "reportData": JSON.stringify(report)
+                    "reportData": JSON.stringify(report),
+                    "id": "myBtn"
                 });
 
                 $(company).text(report.companyName);
@@ -117,13 +118,43 @@ let request = $.ajax({
                 $(table).append(tr);
             }
         });
+    })
+    .catch((error)=>{
+        alert(error);
     });
 })();
+
+createModal = (reportData) => {
+    var modalInfo = `
+        <div class="modal-container">
+        <h5>Candidate Name</h5>
+            <p>${reportData.candidateName}</p>
+                <div>
+                    <h5>Company</h5>
+                    <p>${reportData.companyName}</p>
+                    <h5>Interview Date</h5>
+                    <p>${new Date(reportData.interviewDate).toDateString().slice(3)}</p>
+                    <h5>Phase</h5>
+                    <p>${reportData.phase}</p>
+                    <h5>Status</h5>
+                    <p>${reportData.status}</p>
+                 </div>
+                <div>
+                    <h5>Notes</h5>
+                    <p>${reportData.note}</p>
+                </div>
+        </div>
+    `
+    var cModal = new Modal({
+        content: modalInfo
+    });
+    cModal.open()
+}
 
 openModal = (event) => {
     if (event.target.className == "modal-icon") {
         var reportData = JSON.parse(event.target.getAttribute("reportData"));
-        console.log(reportData);
+        createModal(reportData);
     }
 }
 

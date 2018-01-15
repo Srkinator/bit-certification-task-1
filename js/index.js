@@ -41,6 +41,9 @@ var candidatePlaceholder = "http://style.anu.edu.au/_anu/4/images/placeholders/p
                 cardContainer.appendChild(email);
                 card.appendChild(cardContainer);
 
+            })
+            .catch((error)=>{
+                console.log(error);
             });
         });
 })();
