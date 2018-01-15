@@ -12,7 +12,6 @@ homeButton.addEventListener("click", function () {
 });
 
 (loadInfo = () => {
-    console.log(infoContainer);
     var imgDiv = $("<div>");
     var infoDiv1 = $("<div>");
     var infoDiv2 = $("<div>");
@@ -91,7 +90,6 @@ let request = $.ajax({
     request.done(result => {
         result.forEach((report, i) => {
             if (report.candidateId == data.id) {
-                console.log(report);
                 var tr = $("<tr>");
                 var company = $("<td>");
                 var interviewDate = $("<td>");

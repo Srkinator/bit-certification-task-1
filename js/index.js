@@ -26,7 +26,6 @@ var candidatePlaceholder = "http://style.anu.edu.au/_anu/4/images/placeholders/p
             avatar.setAttribute("data", data);
             avatar.setAttribute("class", "redirect");
             
-            
                 if (candidate.avatar.length > 1) {
                     avatar.setAttribute("src", candidate.avatar);
                 }
@@ -40,10 +39,6 @@ var candidatePlaceholder = "http://style.anu.edu.au/_anu/4/images/placeholders/p
                 cardContainer.appendChild(name);
                 cardContainer.appendChild(email);
                 card.appendChild(cardContainer);
-
-            })
-            .catch((error)=>{
-                console.log(error);
             });
         });
 })();
@@ -51,13 +46,11 @@ var candidatePlaceholder = "http://style.anu.edu.au/_anu/4/images/placeholders/p
 
 searchHandler = () => {
     var input, filter, i, name;
-    console.log("aaa");
     input = document.getElementById("search");
     filter = input.value.toUpperCase();
     name = document.getElementsByClassName("redirect candidate-name");
 
     for (i = 0; i < name.length; i++) {
-
         if (name[i].innerHTML.toUpperCase().indexOf(filter) > -1) {
             name[i].style.display = "";
         } else {
