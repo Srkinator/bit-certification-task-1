@@ -77,7 +77,7 @@ homeButton.addEventListener("click", function () {
     $(infoContainer).append(imgDiv);
     $(infoContainer).append(infoDiv1);
     $(infoContainer).append(infoDiv2);
-
+  
 })();
 
 let request = $.ajax({

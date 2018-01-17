@@ -1,4 +1,6 @@
 var candidatePlaceholder = "http://style.anu.edu.au/_anu/4/images/placeholders/person.png";
+var homeButton = document.getElementsByClassName("home")[0];
+
 
 (loadCandidates = () => {
     fetch("http://localhost:3333/api/candidates")
@@ -41,6 +43,9 @@ var candidatePlaceholder = "http://style.anu.edu.au/_anu/4/images/placeholders/p
                 card.appendChild(cardContainer);
             });
         });
+        if(window.location.hash.indexOf("/index.html") == -1){
+            homeButton.setAttribute("class", "selected home ");
+        }
 })();
 
 
@@ -75,7 +80,6 @@ redirectCandidate = (event) => {
 
 document.addEventListener("click", redirectCandidate);
 
-var homeButton = document.getElementsByClassName("home")[0];
 
 homeButton.addEventListener("click", function() {
     location.assign("index.html");
