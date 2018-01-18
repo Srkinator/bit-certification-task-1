@@ -1,4 +1,4 @@
-var candidatePlaceholder = "http://style.anu.edu.au/_anu/4/images/placeholders/person.png";
+var candidatePlaceholder = "http://www.salesmarketingalliance.com/wp-content/uploads/2016/11/PersonPlaceHolder.png";
 var homeButton = document.getElementsByClassName("home")[0];
 
 
@@ -19,7 +19,7 @@ var homeButton = document.getElementsByClassName("home")[0];
 
             cardContainer.setAttribute("id", candidate.id);
             cardContainer.setAttribute("data", data);
-            cardContainer.setAttribute("class", "candidate-card col-sm-12 col-md-6 col-lg-4");
+            cardContainer.setAttribute("class", "candidate-card col-sm-12 col-md-5 col-lg-5");
 
             name.setAttribute("data", data);
             name.setAttribute("class", "redirect candidate-name");
@@ -71,7 +71,7 @@ searchHandler = () => {
 document.getElementById("search").addEventListener("keyup", searchHandler);
 
 redirectCandidate = (event) => {
-    if (event.target.className == "redirect" || event.target.className == "candidate-card col-sm-12 col-md-6 col-lg-4") {
+    if (event.target.className == "redirect" || event.target.className == "candidate-card col-sm-12 col-md-5 col-lg-5") {
         var datafinal = event.target.getAttribute("data");
         localStorage.setItem("candidateID", datafinal);
         location.assign("candidate.html"); 
